@@ -1,0 +1,83 @@
+<h1>Студенты</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <!-- <td>Id</td> -->
+            <td>Курс</td>
+            <td>Имя</td>
+            <td>Фамилия</td>
+            <td>Почта</td>
+            <td>Номер</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of students">
+            <ng-template [ngIf]="student?.id != p.id" [ngIfElse]="edit">
+                <!-- <td>{{p?.id}}</td> -->
+                <td>{{p?.level}}</td>
+                <td>{{p?.firstName}}</td>
+                <td>{{p?.lastName}}</td>
+                <td>{{p?.email}}</td>
+                <td>{{p?.phone}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editStudent(p)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        <input type="text" [(ngModel)]="student.firstname" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="student.lastname" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="student.level" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="student.email" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="student.phone" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+
+ 
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>Имя</label>
+        <input type="text" [(ngModel)]="student.firstname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Фамилия</label>
+        <input type="text" [(ngModel)]="student.lastname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Курс</label>
+        <input type="number" [(ngModel)]="student.level" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Почта</label>
+        <input type="text" [(ngModel)]="student.email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Номер</label>
+        <input type="text" [(ngModel)]="student.phone" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+</ng-template>

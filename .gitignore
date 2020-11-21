@@ -1,0 +1,4 @@
+/bin
+/ClientApp/node_modules
+/obj
+/Migrations
